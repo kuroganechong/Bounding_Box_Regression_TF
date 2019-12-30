@@ -3,7 +3,7 @@ from Model import ObjectLocalizer
 from PIL import Image , ImageDraw
 import numpy as np
 
-input_dim = 228
+input_dim = 32
 
 X = np.load( 'processed_data/x.npy')
 Y = np.load( 'processed_data/y.npy')
@@ -15,12 +15,12 @@ print( Y.shape )
 print( test_X.shape )
 print( test_Y.shape )
 
-localizer = ObjectLocalizer( input_shape=( input_dim , input_dim , 3 ) )
+localizer = ObjectLocalizer( input_shape=( input_dim , input_dim , 1 ) )
 #localizer.load_model( 'models/model.h5')
 
 parameters = {
-    'batch_size' : 100 ,
-    'epochs' : 10 ,
+    'batch_size' : 3 ,
+    'epochs' : 200 ,
     'callbacks' : None ,
     'val_data' : ( test_X , test_Y )
 }

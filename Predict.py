@@ -1,0 +1,39 @@
+
+from Model import ObjectLocalizer
+from PIL import Image , ImageDraw
+import numpy as np
+
+input_dim = 32
+
+def calculate_avg_iou( target_boxes , pred_boxes ):
+    xA = np.maximum( target_boxes[ ... , 0], pred_boxes[ ... , 0] )
+    yA = np.maximum( target_boxes[ ... , 1], pred_boxes[ ... , 1] )
+    xB = np.minimum( target_boxes[ ... , 2], pred_boxes[ ... , 2] )
+    yB = np.minimum( target_boxes[ ... , 3], pred_boxes[ ... , 3] )
+    interArea = np.maximum(0.0, xB - xA ) * np.maximum(0.0, yB - yA )
+    boxAArea = (target_boxes[ ... , 2] - target_boxes[ ... , 0]) * (target_boxes[ ... , 3] - target_boxes[ ... , 1])
+    boxBArea = (pred_boxes[ ... , 2] - pred_boxes[ ... , 0]) * (pred_boxes[ ... , 3] - pred_boxes[ ... , 1])
+    iou = interArea / ( boxAArea + boxBArea - interArea )
+    return iou
+
+def class_accuracy( target_classes , pred_classes ):
+    target_classes = np.argmax( target_classes , axis=1 )
+    pred_classes = np.argmax( pred_classes , axis=1 )
+    return ( target_classes == pred_classes ).mean()
+
+test_X = np.load( 'test_data/test.npy').reshape((1,input_dim,input_dim,1))
+
+localizer = ObjectLocalizer( input_shape=( input_dim , input_dim , 1 ) )
+# localizer.load_model_weights( 'pretrained_weights/pretrained_weights.h5' )
+localizer.load_model_weights('models/model.h5')
+
+boxes = localizer.predict( test_X )
+for i in range( boxes.shape[0] ):
+    b = boxes[ i , 0 : 4 ] * input_dim
+    img = (test_X[i]) / (np.amax(test_X[i]) - np.amin(test_X[i]))
+    img = img.clip(min=0)
+    img =  img * 255
+    source_img = Image.fromarray( img.astype( np.uint8 ).reshape(input_dim,input_dim) , 'L' )
+    draw = ImageDraw.Draw( source_img )
+    draw.rectangle( b , outline="white" )
+    source_img.save( 'test_inference_images/image_{}.png'.format( i + 1 ) , 'png' )

@@ -3,7 +3,7 @@ from Model import ObjectLocalizer
 from PIL import Image , ImageDraw
 import numpy as np
 
-input_dim = 228
+input_dim = 32
 
 def calculate_avg_iou( target_boxes , pred_boxes ):
     xA = np.maximum( target_boxes[ ... , 0], pred_boxes[ ... , 0] )
@@ -31,8 +31,9 @@ print( Y.shape )
 print( test_X.shape )
 print( test_Y.shape )
 
-localizer = ObjectLocalizer( input_shape=( input_dim , input_dim , 3 ) )
-localizer.load_model_weights( 'pretrained_weights/pretrained_weights.h5' )
+localizer = ObjectLocalizer( input_shape=( input_dim , input_dim , 1 ) )
+# localizer.load_model_weights( 'pretrained_weights/pretrained_weights.h5' )
+localizer.load_model_weights('models/model.h5')
 
 target_boxes = test_Y * input_dim
 pred = localizer.predict( test_X )
@@ -47,8 +48,10 @@ print( 'Class Accuracy is {} %'.format( class_accuracy( test_Y[ ... , 4 : ] , pr
 boxes = localizer.predict( test_X )
 for i in range( boxes.shape[0] ):
     b = boxes[ i , 0 : 4 ] * input_dim
-    img = test_X[i] * 255
-    source_img = Image.fromarray( img.astype( np.uint8 ) , 'RGB' )
+    img = (test_X[i]) / (np.amax(test_X[i]) - np.amin(test_X[i]))
+    img = img.clip(min=0)
+    img =  img * 255
+    source_img = Image.fromarray( img.astype( np.uint8 ).reshape(input_dim,input_dim) , 'L' )
     draw = ImageDraw.Draw( source_img )
-    draw.rectangle( b , outline="black" )
+    draw.rectangle( b , outline="white" )
     source_img.save( 'inference_images/image_{}.png'.format( i + 1 ) , 'png' )

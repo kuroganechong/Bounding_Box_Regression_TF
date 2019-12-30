@@ -8,17 +8,19 @@ import glob
 import os
 
 
-image_dim = 228
-images_dir = 'images'
+image_dim = 32
+images_dir = 'images/331'
 output_dir = 'processed_data'
 
 xml_filepaths = glob.glob( os.path.join( images_dir , '*.xml' ) )
-jpg_filepaths = glob.glob( os.path.join( images_dir , '*.jpg' ) )
+jpg_filepaths = glob.glob( os.path.join( images_dir , '*.npy' ) )
 
 images = []
 for filepath in jpg_filepaths:
-	image = Image.open( filepath ).resize( ( image_dim , image_dim ) )
-	images.append( np.asarray( image ) / 255 )
+	# image = Image.open( filepath ).resize( ( image_dim , image_dim ) )
+	# images.append( np.asarray( image ) / 255 )
+	image = np.load(filepath)
+	images.append(np.reshape(image,(image_dim,image_dim,1)))
 
 bboxes = []
 classes = []
