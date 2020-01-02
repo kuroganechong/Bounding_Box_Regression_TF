@@ -31,17 +31,19 @@ class ObjectLocalizer ( object ) :
 			return calculate_iou(y_true, y_pred)
 
 		model_layers = [
-			keras.layers.Conv2D(16, kernel_size=(3, 3), strides=1, input_shape=input_shape),
+			keras.layers.Conv2D(8, kernel_size=(3, 3), strides=1, input_shape=input_shape),
 			keras.layers.LeakyReLU(alpha=alpha),
-			keras.layers.Conv2D(16, kernel_size=(3, 3), strides=1),
+			keras.layers.Conv2D(8, kernel_size=(3, 3), strides=1),
 			keras.layers.LeakyReLU(alpha=alpha),
 			keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
+			keras.layers.Conv2D(16, kernel_size=(3, 3), strides=1),
+			keras.layers.LeakyReLU(alpha=alpha),
+			keras.layers.Conv2D(16, kernel_size=(3, 3), strides=1),
+			keras.layers.LeakyReLU(alpha=alpha),
 			# keras.layers.Conv2D(32, kernel_size=(3, 3), strides=1),
 			# keras.layers.LeakyReLU(alpha=alpha),
-			# keras.layers.Conv2D(32, kernel_size=(3, 3), strides=1),
-			# keras.layers.LeakyReLU(alpha=alpha),
-			# keras.layers.MaxPooling2D(pool_size=(2, 2)),
+			keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
 			# keras.layers.Conv2D(64, kernel_size=(3, 3), strides=1),
 			# keras.layers.LeakyReLU(alpha=alpha),
@@ -71,7 +73,7 @@ class ObjectLocalizer ( object ) :
 			# keras.layers.LeakyReLU(alpha=alpha),
 			# keras.layers.Dense(120),
 			# keras.layers.LeakyReLU(alpha=alpha),
-			keras.layers.Dense(62),
+			keras.layers.Dense(5),
 			keras.layers.LeakyReLU(alpha=alpha),
 
 			# keras.layers.Dense( 7 ),

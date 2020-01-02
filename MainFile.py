@@ -1,7 +1,11 @@
 
-from Model import ObjectLocalizer
-from PIL import Image , ImageDraw
+from datetime import datetime
+
 import numpy as np
+from tensorflow.python.keras.callbacks import EarlyStopping, TensorBoard
+from PIL import Image, ImageDraw
+
+from Model import ObjectLocalizer
 
 input_dim = 32
 
@@ -16,12 +20,16 @@ print( test_X.shape )
 print( test_Y.shape )
 
 localizer = ObjectLocalizer( input_shape=( input_dim , input_dim , 1 ) )
-#localizer.load_model( 'models/model.h5')
+# localizer.load_model_weights( 'models/model.h5')
+
+# Instantiate Tensorboard for visualisation
+logdir = ".\\logs\\" + datetime.now().strftime("%Y%m%d-%H%M%S")
+tensorboard_callback = TensorBoard(log_dir=logdir)
 
 parameters = {
     'batch_size' : 3 ,
     'epochs' : 200 ,
-    'callbacks' : None ,
+    'callbacks' : [tensorboard_callback] ,
     'val_data' : ( test_X , test_Y )
 }
 

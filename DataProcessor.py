@@ -9,14 +9,21 @@ import os
 
 
 image_dim = 32
-images_dir = 'images/331'
+rootimages_dir = 'images'
+rootxml_dir = 'images/labels'
 output_dir = 'processed_data'
+xml_filepaths = []
+img_filepaths = []
 
-xml_filepaths = glob.glob( os.path.join( images_dir , '*.xml' ) )
-jpg_filepaths = glob.glob( os.path.join( images_dir , '*.npy' ) )
+xml_filepaths.extend(glob.glob( os.path.join( rootxml_dir+'/331' , '*.xml' ) ))
+img_filepaths.extend(glob.glob( os.path.join( rootimages_dir+'/331' , '*.npy' ) ))
+xml_filepaths.extend(glob.glob( os.path.join( rootxml_dir+'/332' , '*.xml' ) ))
+img_filepaths.extend(glob.glob( os.path.join( rootimages_dir+'/332' , '*.npy' ) ))
+xml_filepaths.extend(glob.glob( os.path.join( rootxml_dir+'/333' , '*.xml' ) ))
+img_filepaths.extend(glob.glob( os.path.join( rootimages_dir+'/333' , '*.npy' ) ))
 
 images = []
-for filepath in jpg_filepaths:
+for filepath in img_filepaths:
 	# image = Image.open( filepath ).resize( ( image_dim , image_dim ) )
 	# images.append( np.asarray( image ) / 255 )
 	image = np.load(filepath)

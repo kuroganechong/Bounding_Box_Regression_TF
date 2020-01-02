@@ -1,0 +1,26 @@
+<annotation>
+	<folder>332</folder>
+	<filename>0200.png</filename>
+	<path>C:\Users\kurog\OneDrive\Desktop\Current Sem\work\Human Detection\5. Data and Model\Data\2. Old matlab to png conversion\data\332\0200.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>32</width>
+		<height>32</height>
+		<depth>1</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>person</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>14</xmin>
+			<ymin>6</ymin>
+			<xmax>32</xmax>
+			<ymax>29</ymax>
+		</bndbox>
+	</object>
+</annotation>

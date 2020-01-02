@@ -30,8 +30,9 @@ localizer.load_model_weights('models/model.h5')
 boxes = localizer.predict( test_X )
 for i in range( boxes.shape[0] ):
     b = boxes[ i , 0 : 4 ] * input_dim
-    img = (test_X[i]) / (np.amax(test_X[i]) - np.amin(test_X[i]))
+    img = test_X[i] - 28.5
     img = img.clip(min=0)
+    img = (img) / np.amax(img)
     img =  img * 255
     source_img = Image.fromarray( img.astype( np.uint8 ).reshape(input_dim,input_dim) , 'L' )
     draw = ImageDraw.Draw( source_img )
