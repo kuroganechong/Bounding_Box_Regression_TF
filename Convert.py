@@ -7,16 +7,16 @@ input_shape = (32,32,1)
 
 # Create model backbone (make sure updated according to Model.py)
 model_layers = [
-    keras.layers.Conv2D(8, kernel_size=(3, 3), strides=1,
+    keras.layers.Conv2D(4, kernel_size=(3, 3), strides=1,
                         input_shape=input_shape),
     keras.layers.PReLU(),
-    keras.layers.Conv2D(8, kernel_size=(3, 3), strides=1),
+    keras.layers.Conv2D(4, kernel_size=(3, 3), strides=1),
     keras.layers.PReLU(),
     keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
-    keras.layers.Conv2D(16, kernel_size=(3, 3), strides=1),
+    keras.layers.Conv2D(4, kernel_size=(3, 3), strides=1),
     keras.layers.PReLU(),
-    keras.layers.Conv2D(16, kernel_size=(3, 3), strides=1),
+    keras.layers.Conv2D(4, kernel_size=(3, 3), strides=1),
     keras.layers.PReLU(),
     keras.layers.MaxPooling2D(pool_size=(2, 2)),
 

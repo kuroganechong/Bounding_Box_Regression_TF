@@ -27,7 +27,7 @@ logdir = ".\\logs\\" + datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = TensorBoard(log_dir=logdir)
 
 parameters = {
-    'batch_size' : 3 ,
+    'batch_size' : 6 ,
     'epochs' : 200 ,
     'callbacks' : [tensorboard_callback] ,
     'val_data' : ( test_X , test_Y )
