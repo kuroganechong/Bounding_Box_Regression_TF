@@ -4,29 +4,26 @@ from Model import ObjectLocalizer
 from tensorflow import keras
 
 input_shape = (32,32,1)
+alpha = 0.2
 
 # Create model backbone (make sure updated according to Model.py)
 model_layers = [
     keras.layers.Conv2D(4, kernel_size=(3, 3), strides=1,
                         input_shape=input_shape),
-    keras.layers.PReLU(),
-    keras.layers.Conv2D(4, kernel_size=(3, 3), strides=1),
-    keras.layers.PReLU(),
+    keras.layers.LeakyReLU(alpha=alpha),
     keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
     keras.layers.Conv2D(4, kernel_size=(3, 3), strides=1),
-    keras.layers.PReLU(),
-    keras.layers.Conv2D(4, kernel_size=(3, 3), strides=1),
-    keras.layers.PReLU(),
+    keras.layers.LeakyReLU(alpha=alpha),
     keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
     keras.layers.Flatten(),
 
     keras.layers.Dense(5),
-    keras.layers.PReLU(),
+    keras.layers.LeakyReLU(alpha=alpha),
 
     keras.layers.Dense(5),
-    keras.layers.PReLU(),
+    keras.layers.LeakyReLU(alpha=alpha)
 ]
 
 model = keras.Sequential(model_layers)
