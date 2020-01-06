@@ -34,6 +34,6 @@ model.save('convert/model_no_opt.h5', include_optimizer=False)
 
 # Convert the model.
 converter = tf.lite.TFLiteConverter.from_keras_model_file('convert/model_no_opt.h5')
-converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
 tflite_model = converter.convert()
 open("convert/converted_model.tflite", "wb").write(tflite_model)
