@@ -1,4 +1,3 @@
-
 from Model import ObjectLocalizer
 from PIL import Image , ImageDraw
 import numpy as np

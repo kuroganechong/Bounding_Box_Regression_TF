@@ -1,7 +1,6 @@
 #include "output_handler.h"
 
 #include "Arduino.h"
-#include "constants.h"
 
 // The pin of the Arduino's built-in LED
 int led = LED_BUILTIN;
@@ -10,7 +9,7 @@ int led = LED_BUILTIN;
 bool initialized = false;
 
 // Animates a dot across the screen to represent the current x and y values
-void HandleOutput(tflite::ErrorReporter* error_reporter, float x_value, float y_value) {
+void RespondToDetection(tflite::ErrorReporter* error_reporter,float xA, float yA, float xB, float yB) {
   // Do this only once
   if (!initialized) {
     // Set the LED pin to output
@@ -18,14 +17,9 @@ void HandleOutput(tflite::ErrorReporter* error_reporter, float x_value, float y_
     initialized = true;
   }
 
-  // Calculate the brightness of the LED such that y=-1 is fully off
-  // and y=1 is fully on. The LED's brightness can range from 0-255.
-  int brightness = (int)(127.5f * (y_value + 1));
+  error_reporter->Report("xA: %f, yA: %f, xB: %f, yB: %f\n\n", xA, yA, xB, yB);
 
-  // Set the brightness of the LED. If the specified pin does not support PWM,
-  // this will result in the LED being on when y > 127, off otherwise.
-  analogWrite(led, brightness);
-
-  // Log the current brightness value for display in the Arduino plotter
-  error_reporter->Report("%d\n", brightness);
+  digitalWrite(led,LOW);
+  delay(100);
+  digitalWrite(led,HIGH);
 }
