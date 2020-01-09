@@ -35,15 +35,15 @@ class ObjectLocalizer (object):
 
         model_layers = [
             keras.layers.Conv2D(4, kernel_size=(
-                5, 5), strides=1, input_shape=input_shape),
+                3, 3), strides=1, input_shape=input_shape),
             # keras.layers.LeakyReLU(alpha=alpha),
             # keras.layers.PReLU(),
             # keras.layers.ReLU(),
             keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
-            keras.layers.Conv2D(4, kernel_size=(5, 5), strides=1),
+            keras.layers.Conv2D(4, kernel_size=(3, 3), strides=1),
             # keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.PReLU(),
+            keras.layers.PReLU(),
             # keras.layers.ReLU(),
             keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
