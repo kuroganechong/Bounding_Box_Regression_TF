@@ -35,60 +35,29 @@ class ObjectLocalizer (object):
 
         model_layers = [
             keras.layers.Conv2D(4, kernel_size=(
-                3, 3), strides=1, input_shape=input_shape),
+                5, 5), strides=1, input_shape=input_shape),
             # keras.layers.LeakyReLU(alpha=alpha),
             # keras.layers.PReLU(),
-            # keras.layers.Conv2D(4, kernel_size=(3, 3), strides=1),
-            keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.PReLU(),
+            # keras.layers.ReLU(),
             keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
-            keras.layers.Conv2D(4, kernel_size=(3, 3), strides=1),
+            keras.layers.Conv2D(4, kernel_size=(5, 5), strides=1),
             # keras.layers.LeakyReLU(alpha=alpha),
             # keras.layers.PReLU(),
-            # keras.layers.Conv2D(4, kernel_size=(3, 3), strides=1),
-            keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.PReLU(),
-            # keras.layers.Conv2D(32, kernel_size=(3, 3), strides=1),
-            # keras.layers.LeakyReLU(alpha=alpha),
+            # keras.layers.ReLU(),
             keras.layers.MaxPooling2D(pool_size=(2, 2)),
-
-            # keras.layers.Conv2D(64, kernel_size=(3, 3), strides=1),
-            # keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.Conv2D(64, kernel_size=(3, 3), strides=1),
-            # keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.MaxPooling2D(pool_size=(2, 2)),
-
-            # keras.layers.Conv2D(128, kernel_size=(3, 3), strides=1),
-            # keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.Conv2D(128, kernel_size=(3, 3), strides=1),
-            # keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.MaxPooling2D(pool_size=(2, 2)),
-
-            # keras.layers.Conv2D(256, kernel_size=(3, 3), strides=1),
-            # keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.Conv2D(256, kernel_size=(3, 3), strides=1),
-            # keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.MaxPooling2D(pool_size=(2, 2)),
 
             keras.layers.Flatten(),
 
-            # keras.layers.Dense(1240),
-            # keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.Dense(640),
-            # keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.Dense(480),
-            # keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.Dense(120),
-            # keras.layers.LeakyReLU(alpha=alpha),
             keras.layers.Dense(5),
-            keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.PReLU(),
+            # keras.layers.LeakyReLU(alpha=alpha),
+            keras.layers.PReLU(),
+            # keras.layers.ReLU(),
 
-            # keras.layers.Dense( 7 ),
             keras.layers.Dense(5),
-            keras.layers.LeakyReLU(alpha=alpha),
-            # keras.layers.PReLU(),
+            # keras.layers.LeakyReLU(alpha=alpha),
+            keras.layers.PReLU()
+            # keras.layers.ReLU(),
         ]
 
         self.__model = keras.Sequential(model_layers)

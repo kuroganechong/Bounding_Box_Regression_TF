@@ -4,7 +4,6 @@
 #include "imageprovider.h"
 #include "modelsettings.h"
 #include "pgmspace.h"
-
 const static short temp[32][32] PROGMEM = {{15., 23.3, 23.5, 23.8, 24.1, 25.5, 25.3, 25.5, 27.5, 27.5, 27.2,
          27.2, 27.3, 27.3, 27.3, 27.2, 25.8, 25.8, 26.5, 26.5, 24.9, 24.9,
          26.1, 26.1, 25.5, 25.3, 25.3, 24.8, 24.3, 24.3, 21.9, 15.},

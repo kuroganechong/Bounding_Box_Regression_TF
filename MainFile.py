@@ -22,12 +22,14 @@ print( test_Y.shape )
 localizer = ObjectLocalizer( input_shape=( input_dim , input_dim , 1 ) )
 # localizer.load_model_weights( 'models/model.h5')
 
+print(localizer.summary())
+
 # Instantiate Tensorboard for visualisation
 logdir = ".\\logs\\" + datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = TensorBoard(log_dir=logdir)
 
 parameters = {
-    'batch_size' : 6 ,
+    'batch_size' : 32 ,
     'epochs' : 200 ,
     'callbacks' : [tensorboard_callback] ,
     'val_data' : ( test_X , test_Y )
