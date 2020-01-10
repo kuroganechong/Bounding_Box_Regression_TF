@@ -1,5 +1,6 @@
 {
     "board": "arduino:mbed:nano33ble",
-    "port": "COM7",
-    "programmer": "AVRISP mkII"
+    "port": "COM5",
+    "programmer": "AVRISP mkII",
+    "sketch": "arduino\\bbtf\\bbtf.ino"
 }

@@ -1,7 +1,5 @@
 #include "model.h"
 
-// Non quantified model
-
 // We need to keep the data array aligned on some architectures.
 #ifdef __has_attribute
 #define HAVE_ATTRIBUTE(x) __has_attribute(x)
@@ -13,6 +11,9 @@
 #else
 #define DATA_ALIGN_ATTRIBUTE
 #endif
+
+// Non quantified model
+
 const unsigned char converted_model_tflite[] DATA_ALIGN_ATTRIBUTE = {
   0x18, 0x00, 0x00, 0x00, 0x54, 0x46, 0x4c, 0x33, 0x00, 0x00, 0x0e, 0x00,
   0x18, 0x00, 0x04, 0x00, 0x08, 0x00, 0x0c, 0x00, 0x10, 0x00, 0x14, 0x00,

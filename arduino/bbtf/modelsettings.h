@@ -6,9 +6,9 @@
 
 // All of these values are derived from the values used during model training,
 // if you change your model you'll need to update these constants.
-constexpr int kNumCols = 32;
-constexpr int kNumRows = 32;
-constexpr int kNumChannels = 1;
+constexpr char kNumCols = 32;
+constexpr char kNumRows = 32;
+constexpr char kNumChannels = 1;
 
 constexpr int kMaxImageSize = kNumCols * kNumRows * kNumChannels;
 

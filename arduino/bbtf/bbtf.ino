@@ -41,8 +41,7 @@ uint8_t tensor_arena[kTensorArenaSize];
 // The name of this function is important for Arduino compatibility.
 void setup()
 {
-  // Set up logging. Google style is to avoid globals or statics because of
-  // lifetime uncertainty, but since this has a trivial destructor it's okay.
+  // Set up logging.
   // NOLINTNEXTLINE(runtime-global-variables)
   static tflite::MicroErrorReporter micro_error_reporter;
   error_reporter = &micro_error_reporter;
@@ -60,12 +59,6 @@ void setup()
   }
 
   // Pull in only the operation implementations we need.
-  // This relies on a complete list of all the ops needed by this graph.
-  // An easier approach is to just use the AllOpsResolver, but this will
-  // incur some penalty in code space for op implementations that are not
-  // needed by this graph.
-  //
-  // tflite::ops::micro::AllOpsResolver resolver;
   // NOLINTNEXTLINE(runtime-global-variables)
   static tflite::MicroMutableOpResolver micro_mutable_op_resolver;
   micro_mutable_op_resolver.AddBuiltin(
@@ -107,7 +100,7 @@ void loop()
 {
   // Get image to pass into model
   if (kTfLiteOk != GetImage(error_reporter, kNumCols, kNumRows, kNumChannels,
-                            input->data.i16))
+                            input->data.f))
   {
     error_reporter->Report("Image capture failed.");
   }
@@ -119,9 +112,9 @@ void loop()
   }
 
   // Process the inference results.
-  float xA = output->data.i16[0];
-  float yA = output->data.i16[1];
-  float xB = output->data.i16[2];
-  float yB = output->data.i16[3];
+  float xA = output->data.f[0];
+  float yA = output->data.f[1];
+  float xB = output->data.f[2];
+  float yB = output->data.f[3];
   RespondToDetection(error_reporter, xA, yA, xB, yB);
 }
