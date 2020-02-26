@@ -1,6 +1,9 @@
 {
     "python.pythonPath": "C:\\Users\\kurog\\Miniconda3\\python.exe",
     "files.associations": {
-        "mstd_type_traits": "cpp"
+        "mstd_type_traits": "cpp",
+        "chrono": "cpp",
+        "cstdlib": "cpp",
+        "cmath": "cpp"
     }
 }

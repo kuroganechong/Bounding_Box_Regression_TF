@@ -13,7 +13,7 @@ const int led_blue = 24;
 // Track whether the function has run at least once
 bool initialized = false;
 
-// Animates a dot across the screen to represent the current x and y values
+// Print result to serial output
 void RespondToDetection(tflite::ErrorReporter* error_reporter,float xA, float yA, float xB, float yB) {
   // Do this only once
   if (!initialized) {
@@ -31,8 +31,9 @@ void RespondToDetection(tflite::ErrorReporter* error_reporter,float xA, float yA
 
   // Note: The RGB LEDs on the Arduino Nano 33 BLE
   // Sense are on when the pin is LOW, off when HIGH.
-
-  error_reporter->Report("xA: %f, yA: %f, xB: %f, yB: %f\n\n", xA, yA, xB, yB);
+  char tbs[20];
+  sprintf(tbs, "%.2f,%.2f,%.2f,%.2f\n", xA, yA, xB, yB);
+  error_reporter->Report(tbs);
 
   digitalWrite(led,LOW);
   delay(100);

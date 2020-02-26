@@ -86,7 +86,8 @@ void setup()
   TfLiteStatus allocate_status = interpreter->AllocateTensors();
   if (allocate_status != kTfLiteOk)
   {
-    error_reporter->Report("AllocateTensors() failed");
+    // error_reporter->Report("AllocateTensors() failed");
+    RespondToDetection(error_reporter, 0,0,0,0);
     return;
   }
 
@@ -102,19 +103,25 @@ void loop()
   if (kTfLiteOk != GetImage(error_reporter, kNumCols, kNumRows, kNumChannels,
                             input->data.f))
   {
-    error_reporter->Report("Image capture failed.");
+    // error_reporter->Report("Image capture failed.");
+    RespondToDetection(error_reporter, 0,0,0,0);
   }
-
-  // Run the model on this input and make sure it succeeds.
-  if (kTfLiteOk != interpreter->Invoke())
+  else
   {
-    error_reporter->Report("Invoke failed.");
+    // Run the model on this input and make sure it succeeds.
+    if (kTfLiteOk != interpreter->Invoke())
+    {
+      // error_reporter->Report("Invoke failed.");
+      RespondToDetection(error_reporter, 0,0,0,0);
+    }
+    else
+    {
+      // Process the inference results.
+      float xA = output->data.f[0];
+      float yA = output->data.f[1];
+      float xB = output->data.f[2];
+      float yB = output->data.f[3];
+      RespondToDetection(error_reporter, xA, yA, xB, yB);
+    }
   }
-
-  // Process the inference results.
-  float xA = output->data.f[0];
-  float yA = output->data.f[1];
-  float xB = output->data.f[2];
-  float yB = output->data.f[3];
-  RespondToDetection(error_reporter, xA, yA, xB, yB);
 }
